@@ -5,7 +5,16 @@ import ProductCategoryRow from './ProductCategoryRow.js';
 import ProductRow from './ProductRow.js';
 
 var ProductTable = createReactClass({
-    render : function () {
+    // render里面的逻辑部分可以写在componentWillmount
+    componentWillMount: function () {
+        this.handleChangeC();
+    },
+    shouldComponentUpdate: function (nextProps, nextState){
+        this.props = nextProps;//做到及时的更新，、nextProps才是最新的props
+        this.handleChangeC();
+        return true;
+    },
+    handleChangeC:function () {
         var products = this.props.products;
         var row = [];
         var lastCategory = '';
@@ -22,6 +31,9 @@ var ProductTable = createReactClass({
                 }
             }
         })
+        this.row = row;
+    },
+    render : function () {
         return (
             <div>
                 <table>
@@ -32,7 +44,7 @@ var ProductTable = createReactClass({
                         </tr>
                     </thead>
                     <tbody>
-                        {row}
+                        {this.row}
                     </tbody>
                 </table>
             </div>

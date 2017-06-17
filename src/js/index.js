@@ -8,7 +8,7 @@ import ProductTable from './Components/ProductTable.js';
 var Appshow = createReactClass({
     getInitialState : function () {
         return {
-            onlyShowStocked : false,
+            onlyShowStocked : false,//全部显示
             filtText : ''
         }
     },
